@@ -35,7 +35,6 @@ class UsersController < ApplicationController
     
   def signin
     user = User.find_by(username: params[:username])
-    byebug
     if user && user.authenticate(params[:password])
       render json: { user: user, user_bookings: user.bookings, user_wishlists: user.wishlists, user_favourites: user.favourites, user_reviews: user.reviews, token: issue_token({ id: user.id }) }
     else
@@ -54,7 +53,6 @@ class UsersController < ApplicationController
 
   def signup
     user = User.new(username: params[:username], password: params[:password])
-    byebug
     if user.valid?
        user.save
       render json: user
