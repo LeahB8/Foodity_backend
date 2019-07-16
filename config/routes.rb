@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   post '/signin', to: 'users#signin'
   get '/validate', to: 'users#validate'
-  post '/users', to: 'users#signup'
+  post '/signup', to: 'users#signup'
+  get '/profile', to: 'users#show'
 
   resources :reviews
   resources :bookings
