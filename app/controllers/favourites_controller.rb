@@ -1,5 +1,5 @@
 class FavouritesController < ApplicationController
-  before_action :set_favourite, only: [:show, :update, :destroy]
+  # before_action :set_favourite, only: [:show, :update, :destroy]
 
   # GET /favourites
   def index
@@ -15,13 +15,9 @@ class FavouritesController < ApplicationController
 
   # POST /favourites
   def create
-    @favourite = Favourite.new(favourite_params)
-
-    if @favourite.save
-      render json: @favourite, status: :created, location: @favourite
-    else
-      render json: @favourite.errors, status: :unprocessable_entity
-    end
+    byebug
+    @favourite = Favourite.create(user_id: params[:user_id], restaurant_id: params[:restaurant_id])
+      render json: @favourite
   end
 
   # PATCH/PUT /favourites/1
@@ -44,8 +40,4 @@ class FavouritesController < ApplicationController
       @favourite = Favourite.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def favourite_params
-      params.require(:favourite).permit(:user_id, :restaurant_id)
-    end
 end
