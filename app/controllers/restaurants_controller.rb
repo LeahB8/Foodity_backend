@@ -24,15 +24,6 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /restaurants/1
-  def update
-    if @restaurant.update(restaurant_params)
-      render json: @restaurant
-    else
-      render json: @restaurant.errors, status: :unprocessable_entity
-    end
-  end
-
   # DELETE /restaurants/1
   def destroy
     @restaurant.destroy
@@ -46,6 +37,6 @@ class RestaurantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :city, :city_id, :featured_image, :latitude, :longitude, :country_id, :average_cost_for_two, :currency, :cuisines, :aggregate_rating, :all_reviews_count)
+      params.require(:restaurant).permit(:name, :address, :city, :city_id, :featured_image, :latitude, :longitude, :country_id, :average_cost_for_two, :currency, :cuisines, :aggregate_rating, :all_reviews_count, :restaurant_id)
     end
 end
