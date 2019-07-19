@@ -4,12 +4,12 @@ class FavouritesController < ApplicationController
   # GET /favourites
   def index
     @favourites = Favourite.all
-    render json: @favourites
+    render json: @favourites, except: [:created_at, :updated_at]
   end
 
   # GET /favourites/1
   def show
-    render json: @favourite
+    render json: @favourite, except: [:created_at, :updated_at]
   end
 
   # POST /favourites

@@ -5,12 +5,12 @@ class WishlistsController < ApplicationController
   def index
     @wishlists = Wishlist.all
 
-    render json: @wishlists
+    render json: @wishlists, except: [:created_at, :updated_at]
   end
 
   # GET /wishlists/1
   def show
-    render json: @wishlist
+    render json: @wishlist, except: [:created_at, :updated_at]
   end
 
   # POST /wishlists
