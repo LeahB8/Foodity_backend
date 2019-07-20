@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users, except: [:password_digest, :created_at, :updated_at]
+    render json: @users, include: [:favourites, :bookings, :wishlists, :reviews], except: [:password_digest, :created_at, :updated_at]
 
   end
 
@@ -61,6 +61,34 @@ class UsersController < ApplicationController
       render json: { error: 'Username already taken' }, status: 404
     end
   end
+
+  def favourites
+    user = current_user
+    if user
+      render json: user.favourites
+    else
+      render json: { error: 'Invalid token.' }, status: 400
+    end
+  end
+
+  def wishlists
+      user = current_user
+      if user
+        render json: user.wishlists
+      else
+        render json: { error: 'Invalid token.' }, status: 400
+      end
+    end
+
+    def bookings
+      user = current_user
+      if user
+        render json: user.bookings
+      else
+        render json: { error: 'Invalid token.' }, status: 400
+      end
+    end
+
 
 
   private

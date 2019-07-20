@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get '/validate', to: 'users#validate'
   post '/signup', to: 'users#signup'
   get '/profile', to: 'users#show'
+  get '/users/:id/favourites', to: 'users#favourites'
+  get '/users/:id/wishlists', to: 'users#wishlists'
+  get '/users/:id/bookings', to: 'users#bookings'
 
   resources :reviews
   resources :bookings
