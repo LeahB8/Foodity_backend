@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/users/:id/favourites', to: 'users#favourites'
   get '/users/:id/wishlists', to: 'users#wishlists'
   get '/users/:id/bookings', to: 'users#bookings'
+  # post '/restaurants', to ''
 
   resources :reviews
   resources :bookings
