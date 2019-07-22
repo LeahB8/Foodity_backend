@@ -15,7 +15,8 @@ class FavouritesController < ApplicationController
   # POST /favourites
   def create
     # byebug
-    @favourite = Favourite.create(user_id: params[:user_id], restaurant_id: params[:restaurant_id])
+    @restaurant = Restaurant.find_or_create_by(restaurant_api_id: params[:favourite][:restaurant_api_id])
+    @favourite = Favourite.create(user_id: params[:favourite][:user_id], restaurant_id: @restaurant.id)
       render json: @favourite
   end
 

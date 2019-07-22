@@ -15,7 +15,8 @@ class WishlistsController < ApplicationController
 
   # POST /wishlists
   def create
-    @wishlist = Wishlist.new(wishlist_params)
+    @restaurant = Restaurant.find_or_create_by(restaurant_api_id: params[:wishlist][:restaurant_api_id])
+    @wishlist = Wishlist.new(user_id: params[:wishlist][:user_id], restaurant_id: @restaurant.id)
 
     if @wishlist.save
       render json: @wishlist, status: :created, location: @wishlist
