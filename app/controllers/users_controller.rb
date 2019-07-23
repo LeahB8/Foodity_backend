@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def validate
     user = current_user
     if user
-      render json: { user: user, user_bookings: user.booked_restaurants, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
+      render json: { user: user, user_bookings: user.booked_restaurants, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, favourites: user.favourites, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
     else
       render json: { error: 'User not found.' }, status: 404
     end
@@ -89,6 +89,26 @@ class UsersController < ApplicationController
       end
     end
 
+    def delete_favourite
+      @favouriteToDelete = Favourite.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
+      if favouriteToDelete
+        favouriteToDelete.destroy
+      end
+   end
+
+   def delete_wishlist
+    @wishlistToDelete = Wishlist.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
+    if wishlistToDelete
+      wishlistToDelete.destroy
+    end
+ end
+
+  def delete_booking
+    @bookingToDelete = Booking.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
+    if bookingToDelete
+      bookingToDelete.destroy
+    end
+  end
 
 
   private
