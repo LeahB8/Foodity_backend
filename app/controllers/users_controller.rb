@@ -90,21 +90,21 @@ class UsersController < ApplicationController
     end
 
     def delete_favourite
-      @favouriteToDelete = Favourite.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
+      favouriteToDelete = Favourite.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
       if favouriteToDelete
         favouriteToDelete.destroy
       end
    end
 
    def delete_wishlist
-    @wishlistToDelete = Wishlist.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
+    wishlistToDelete = Wishlist.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
     if wishlistToDelete
       wishlistToDelete.destroy
     end
  end
 
   def delete_booking
-    @bookingToDelete = Booking.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
+    bookingToDelete = Booking.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]})
     if bookingToDelete
       bookingToDelete.destroy
     end
