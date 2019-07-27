@@ -15,13 +15,10 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
-    @booking = Booking.new(booking_params)
-
-    if @booking.save
-      render json: @booking, status: :created, location: @booking
-    else
-      render json: @booking.errors, status: :unprocessable_entity
-    end
+    byebug
+    @restaurant = Restaurant.find_or_create_by(restaurant_api_id: params[:restaurant_api_id])
+    @booking = Booking.create(user_id: params[:booking][:user_id], restaurant_id: @restaurant.id, date:[:booking][:date], time:[:booking][:time] )
+      render json: @booking
   end
 
   # PATCH/PUT /bookings/1
