@@ -37,7 +37,9 @@ class UsersController < ApplicationController
   def signin
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-      render json: { user: user, user_bookings: user.booked_restaurants, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
+      # render json: { user: user, user_bookings: user.booked_restaurants, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
+      render json: { user: user, user_bookings: user.booked_restaurants, bookings: user.bookings, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
+
     else
       render json: { error: 'Invalid username/password combination.' }, status: 401
     end
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
   def validate
     user = current_user
     if user
-      render json: { user: user, user_bookings: user.booked_restaurants, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, favourites: user.favourites, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
+      render json: { user: user, user_bookings: user.booked_restaurants, bookings: user.bookings, user_wishlists: user.wishlist_restaurants, user_favourites: user.favourite_restaurants, user_reviews: user.reviewed_restaurants, token: issue_token({ id: user.id }) }
     else
       render json: { error: 'User not found.' }, status: 404
     end
@@ -65,7 +67,7 @@ class UsersController < ApplicationController
   def favourites
     user = current_user
     if user
-      render json: user.favourite_restaurants
+      render json: user.favourites
     else
       render json: { error: 'Invalid token.' }, status: 400
     end
@@ -74,7 +76,7 @@ class UsersController < ApplicationController
   def wishlists
       user = current_user
       if user
-        render json: user.wishlist_restaurants
+        render json: user.wishlists
       else
         render json: { error: 'Invalid token.' }, status: 400
       end
@@ -83,7 +85,7 @@ class UsersController < ApplicationController
     def bookings
       user = current_user
       if user
-        render json: user.booked_restaurants
+        render json: user.bookings
       else
         render json: { error: 'Invalid token.' }, status: 400
       end

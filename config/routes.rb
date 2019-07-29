@@ -11,9 +11,6 @@ Rails.application.routes.draw do
   delete '/users/wishlists/delete', to: 'users#delete_wishlist'
   delete '/users/bookings/delete', to: 'users#delete_booking'
 
-
-  # post '/restaurants', to ''
-
   resources :reviews
   resources :bookings
   resources :wishlists
