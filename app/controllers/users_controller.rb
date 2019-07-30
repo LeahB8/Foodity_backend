@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     user = User.new(username: params[:username], password: params[:password])
     if user.valid?
        user.save
-      render json: user
+      render json: {user: user, token: issue_token({ id: user.id })}
     else
       render json: { error: 'Username already taken' }, status: 404
     end
