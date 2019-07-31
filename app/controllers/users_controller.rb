@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   def favourites
     user = current_user
     if user
-      render json: user.favourites
+      render json: user.favourite_restaurants
     else
       render json: { error: 'Invalid token.' }, status: 400
     end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def wishlists
       user = current_user
       if user
-        render json: user.wishlists
+        render json: user.wishlist_restaurants
       else
         render json: { error: 'Invalid token.' }, status: 400
       end

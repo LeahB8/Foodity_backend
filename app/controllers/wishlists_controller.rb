@@ -19,7 +19,7 @@ class WishlistsController < ApplicationController
     @wishlist = Wishlist.new(user_id: params[:wishlist][:user_id], restaurant_id: @restaurant.id)
 
     if @wishlist.save
-      render json: @wishlist, status: :created, location: @wishlist
+      render json: @restaurant, status: :created, location: @wishlist
     else
       render json: @wishlist.errors, status: :unprocessable_entity
     end

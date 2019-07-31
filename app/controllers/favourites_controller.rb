@@ -16,7 +16,7 @@ class FavouritesController < ApplicationController
   def create
     @restaurant = Restaurant.find_or_create_by(restaurant_api_id: params[:restaurant_api_id])
     @favourite = Favourite.create(user_id: params[:favourite][:user_id], restaurant_id: @restaurant.id)
-      render json: @favourite
+      render json: @restaurant
   end
 
   # DELETE /favourites/1
