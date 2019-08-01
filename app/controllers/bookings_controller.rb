@@ -17,9 +17,16 @@ class BookingsController < ApplicationController
   def create
     @restaurant = Restaurant.find_or_create_by(restaurant_api_id: params[:restaurant_api_id])
     date = params[:date].split('T')[0]
-    time = params[:date].split('T')[1].slice(0,5)
-    @booking = Booking.create(user_id: params[:booking][:user_id], restaurant_id: @restaurant.id, date: date, time: time )
-    # byebug
+    initialTime = params[:date].split('T')[1].slice(0,5)
+    #for british summertime - fix laterrrrr
+    minutes = initialTime.split(':')[1]
+    hour = initialTime.split(':')[0]
+
+    newHour = hour.to_i + 1
+    newHour.to_s + ':' +  minutes
+    realTime = newHour.to_s + ':' +  minutes
+
+    @booking = Booking.create(user_id: params[:booking][:user_id], restaurant_id: @restaurant.id, date: date, time: realTime )
       render json: @booking
   end
 
